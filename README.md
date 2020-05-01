@@ -46,6 +46,23 @@ CSV files for the same are also available through `api.covid19india.org/csv/late
 |:end:| Travel history (No more updated)  | https://api.covid19india.org/travel_history.json  |
 
 
+### Code snippet to read data from the api
+
+```
+## Python 3.x or higher
+import requests
+import json
+import pandas as pd
+
+url = 'https://api.covid19india.org/raw_data1.json'
+response = json.loads(requests.get(url).text)
+print(response.keys())
+
+raw_data = pd.DataFrame(response['raw_data'])
+print(raw_data.shape)
+raw_data.head()
+```
+
 ### CSV
 Sometimes, having files in a spreadsheet format is more useful for analysts and scientists. We have provided the files as downloadable csv files in the following location.
 
