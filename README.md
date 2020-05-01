@@ -45,7 +45,6 @@ CSV files for the same are also available through `api.covid19india.org/csv/late
 |:end:| Deaths and Recoveries (Frozen after Apr 26th) | https://api.covid19india.org/deaths_recoveries.json |
 |:end:| Travel history (No more updated)  | https://api.covid19india.org/travel_history.json  |
 
-
 ### CSV
 Sometimes, having files in a spreadsheet format is more useful for analysts and scientists. We have provided the files as downloadable csv files in the following location.
 
@@ -54,6 +53,25 @@ Sometimes, having files in a spreadsheet format is more useful for analysts and 
 | Google sheets in CSV                                  | [https://api.covid19india.org/csv/](https://api.covid19india.org/csv/)                      |
 
 > :rocket: Quick example : Apply the formula `=IMPORTDATA("https://api.covid19india.org/csv/latest/state_wise.csv")` in A1 cell of a Google Sheets to get the state data for analysis :)
+
+### Code to read the data using the API
+
+```
+# [Requires Python3.x]
+
+from urllib.request import urlopen
+import json
+import pandas
+
+url = "https://api.covid19india.org/raw_data3.json"
+response = urlopen(url)
+data = json.loads(response.read())
+print(data.keys())
+
+raw_data = pd.DataFrame(data['raw_data'])
+print(raw_data.shape)
+raw_data.head()
+```
 
 ## Projects Using This API
 
